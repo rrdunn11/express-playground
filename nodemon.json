@@ -1,4 +1,7 @@
 {
   "ext": "ts",
-  "exec": "ts-node -- ./src/app.ts"
+  "exec": "NODE_ENV=development ts-node -- ./src/app.ts",
+  "execMap": {
+    "log": "NODE_ENV=development ts-node --require './utils/tracing.ts' -- ./src/app.ts"
+  }
 }

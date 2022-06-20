@@ -1,0 +1,38 @@
+services:
+  server:
+    build:
+      context: .
+      args:
+        - NODE_ENV=production
+    ports:
+      - 4000:4000
+    depends_on:
+      - redis
+      - db
+    networks:
+      - default
+  db:
+    image: postgres:14.3-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdb:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+  redis:
+    image: redis:7.0.2-alpine
+    ports:
+      - 6379:6379
+    expose:
+      - "6379"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - default
+
+volumes:
+  pgdb:
+
+networks:
+  default:

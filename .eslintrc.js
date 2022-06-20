@@ -16,5 +16,14 @@ module.exports = {
   ],
   rules: {
     'no-unused-vars': 'off',
+    'import/extensions': 0,
+    'import/prefer-default-export': 'off',
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
   },
 };
