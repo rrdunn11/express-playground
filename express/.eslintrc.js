@@ -18,6 +18,8 @@ module.exports = {
     'no-unused-vars': 'off',
     'import/extensions': 0,
     'import/prefer-default-export': 'off',
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': ['error'],
   },
   settings: {
     'import/resolver': {

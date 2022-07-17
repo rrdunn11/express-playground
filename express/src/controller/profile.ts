@@ -1,3 +1,4 @@
+import { QueryResult } from 'pg';
 import { Request, Response, NextFunction } from 'express';
 import {
   createNewProfile,
@@ -28,15 +29,16 @@ export const saveProfile = async (req: Request, res: Response, next: NextFunctio
 export const getProfile = async (req: Request, res: Response, next: NextFunction) => {
   const { id, email } = req.query as {id: string; email: string};
   try {
-    await redisClient.connect();
-    await redisClient.set('some', 'thing');
-    const redisResult = await redisClient.get('some');
-    console.log('result', redisResult);
+    // await redisClient.connect();
+    // await redisClient.set('some', 'thing');
+    // const redisResult = await redisClient.get('some');
+    // console.log('result', redisResult);
+    let result: QueryResult<any>;
     if (!isNil(id)) {
-      const result = await getProfileById({ id: Number(id) });
+      result = await getProfileById({ id: Number(id) });
       res.send(result.rows[0]);
     } else if (!isNil(email)) {
-      const result = await getProfileByEmail({ email });
+      result = await getProfileByEmail({ email });
       res.send(result.rows[0]);
     } else {
       throw new Error('Not valid query');
